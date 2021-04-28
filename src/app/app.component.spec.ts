@@ -1,12 +1,17 @@
 import { TestBed, async } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        MatDialogModule
       ],
       declarations: [
         AppComponent
@@ -26,10 +31,13 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('angular-mateiral');
   });
 
-  it('should render title', () => {
+  it('should call openDialog', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.openDialog();
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-mateiral app is running!');
-  });
+    const popUpHeader = document.getElementsByTagName('h2')[0] as HTMLHeadElement;
+    expect(popUpHeader.innerText).toEqual('Welcome Samuel');
+
+  })
 });
